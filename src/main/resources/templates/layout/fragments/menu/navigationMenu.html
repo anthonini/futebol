@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!-- [ navigation menu ] start -->
+<nav class="pcoded-navbar navbar-dark" th:fragment="navigationMenu">
+    <div class="navbar-wrapper">
+        <div class="navbar-brand header-logo">
+            <a th:href="@{/}" class="b-brand">
+                <div class="b-bg">
+                    <i class="feather icon-trending-up"></i>
+                </div>
+                <span class="b-title" th:text="#{nome}">Nome da Aplicação</span>
+            </a>
+            <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+        </div>
+        <div class="navbar-content scroll-div">
+            <ul class="nav pcoded-inner-navbar">
+            	<li class="nav-item pcoded-menu-caption" sec:authorize="hasAnyRole('ROLE_CADASTRAR_PERMISSOES', 'ROLE_CADASTRAR_GRUPO_USUARIO')">
+				    <label>Cadastros</label>
+				</li>
+				<li class="nav-item pcoded-hasmenu" th:classappend="${#httpServletRequest.requestURI.contains('/times')} ? 'active pcoded-trigger'">
+				    <a href="#!" class="nav-link">
+				    	<span class="pcoded-micon"><i class="feather icon-users"></i></span>
+				    	<span class="pcoded-mtext">Times</span>
+				    </a>
+				    <ul class="pcoded-submenu">
+				        <li th:classappend="${#httpServletRequest.requestURI.equals('/times')} ? active">
+				        	<a th:href="@{/times}">Busca</a>
+				        </li>
+				    	<li th:classappend="${#httpServletRequest.requestURI.contains('/times/')} ? active">
+				    		<a th:href="@{/times/cadastro}" class="">Cadastro</a>
+				    	</li>
+				    </ul>
+				</li>
+				<li class="nav-item pcoded-hasmenu" th:classappend="${#httpServletRequest.requestURI.contains('/campeonatos')} ? 'active pcoded-trigger'">
+				    <a href="#!" class="nav-link">
+				    	<span class="pcoded-micon"><i class="feather icon-users"></i></span>
+				    	<span class="pcoded-mtext">Campeonatos</span>
+				    </a>
+				    <ul class="pcoded-submenu">
+				        <li th:classappend="${#httpServletRequest.requestURI.equals('/campeonatos')} ? active">
+				        	<a th:href="@{/campeonatos}">Busca</a>
+				        </li>
+				    	<li th:classappend="${#httpServletRequest.requestURI.contains('/campeonatos/')} ? active">
+				    		<a th:href="@{/campeonatos/cadastro}" class="">Cadastro</a>
+				    	</li>
+				    </ul>
+				</li>
+            	<li class="nav-item pcoded-menu-caption" sec:authorize="hasAnyRole('ROLE_CADASTRAR_PERMISSOES', 'ROLE_CADASTRAR_GRUPO_USUARIO')">
+				    <label>Campeonatos</label>
+				</li>        
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- [ navigation menu ] end -->
+</html>

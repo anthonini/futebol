@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "futebol.foto-storage-local.url-base",
+    "type": "java.lang.String",
+    "description": "A description for 'futebol.foto-storage-local.url-base'"
+  },
+  {
+    "name": "futebol.foto-storage-local.local",
+    "type": "java.lang.String",
+    "description": "A description for 'futebol.foto-storage-local.local'"
+  }
+]}

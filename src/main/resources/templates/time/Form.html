@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}"
+	xmlns:an="http://www.anthonini.com.br">
+
+<head>
+	<title>Cadastro de Time</title>
+	
+	<link rel="stylesheet" th:href="@{/stylesheet/vendors/upload.min.css}"/>
+</head>
+
+<body>
+	<th:block layout:fragment="conteudo">
+		<div class="page-header">
+			<div class="page-block">
+				<div class="row align-items-center">
+					<div class="col-md-12">
+						<div class="page-header-title">
+							<h5 class="m-b-10">Time</h5>
+						</div>
+						<ul class="breadcrumb">
+							<li class="breadcrumb-item"><a th:href="@{/}"><i class="feather icon-home"></i></a></li>
+							<li class="breadcrumb-item"><a th:href="@{/times}">Times</a></li>
+							<li class="breadcrumb-item" th:if="${time.novo}"><a href="#!">Cadastro</a></li>
+							<li class="breadcrumb-item" th:unless="${time.novo}"><a href="#!">Edição</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="main-body">
+			<div class="page-wrapper">
+				<!-- [ Main Content ] start -->
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="card">
+							<div class="card-header">
+								<h5>Time</h5>
+							</div>
+					        <div class="card-block">
+					        	<form th:object="${time}" th:action="${time.novo} ? @{/times/cadastro} : @{/times/{id}(id=${time.id})}" method="POST">
+						        	<div class="row">
+						        		<div class="col-md-6">
+						        			<div class="form-group">
+												<label class="form-label">Nome</label>
+												<input type="text" class="form-control" placeholder="Nome" th:field="*{nome}" an:classforerror="nome">
+											</div>
+						        		</div>
+						        	</div>
+						        	<div class="row">
+										<div class="form-group  col-sm-12">
+											<label class="control-label">Escudo</label>
+											<input type="hidden" th:field="*{arquivoFoto.nome}"/>
+											<input type="hidden" th:field="*{arquivoFoto.contentType}"/>
+											<input type="hidden" th:field="*{arquivoFoto.url}"/>
+											<input type="hidden" th:field="*{arquivoFoto.novoNome}"/>
+											<div class="js-foto-container" th:attr="data-url-foto=@{/fotos}">
+												<div id="upload-drop" class="an-upload">
+													<img th:src="@{/images/mini-loading.gif}" class="js-img-loading d-none"/>
+													<i class="glyphicon  glyphicon-cloud-upload"></i>
+													<span>Arraste a foto aqui ou </span>
+													<a class="an-upload-form-file">selecione <input id="upload-select" type="file" accept=".jpg,.jpeg,.png"/></a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<input type="hidden" th:field="*{id}">
+									<button class="btn btn-primary" type="submit">Salvar</button>
+								</form>
+							</div>
+							<th:block th:replace="hbs/FotoEscudo"></th:block>
+						</div>
+					</div>
+				</div>
+				<!-- [ Main Content ] end -->
+			</div>
+		</div>
+	</th:block>
+	<th:block layout:fragment="javascript">
+		<script th:src="@{/javascript/vendors/uikit.min.js}"></script>
+		<script th:src="@{/javascript/vendors/upload.min.js}"></script>
+		<script th:src="@{/javascript/vendors/handlebars.min.js}"></script>
+		<script th:src="@{/javascript/futebol.foto-upload.js}"></script>
+	</th:block>
+</body>
+</html>
